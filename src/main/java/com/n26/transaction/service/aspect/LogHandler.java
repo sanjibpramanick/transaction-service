@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LogHandler {
 
-	@Around("@annotation(Log)")
+	@Around("@annotation(com.n26.transaction.service.annotation.Log)")
 	public Object around(ProceedingJoinPoint point) {
 
 		Object result = null;
