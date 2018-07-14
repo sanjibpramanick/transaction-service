@@ -32,6 +32,7 @@ public class TransactionEventProvider {
 	 */
 	@Log
 	public int createEntry(TransactionRequestVO transactionRequest) {
+		LOG.info("Transaction Received");
 		if (transactionRequest == null) {
 			return HttpServletResponse.SC_BAD_REQUEST;
 		}

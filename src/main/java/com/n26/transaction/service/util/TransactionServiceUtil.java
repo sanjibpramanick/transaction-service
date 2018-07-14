@@ -8,8 +8,6 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.n26.transaction.service.annotation.Log;
-
 /**
  * Util for the application
  * 
@@ -26,11 +24,16 @@ public class TransactionServiceUtil {
 	 * @param epochTime
 	 * @return
 	 */
-	@Log
 	public static Long convertEpochToTimestamp(Long epochTime) {
 		return epochTime * 1000;
 	}
 
+	/**
+	 * 
+	 * @param tansactionTimestamp
+	 * @param maxDiff
+	 * @return
+	 */
 	public static boolean isTansactionMadeBeforeTime(Long tansactionTimestamp, Integer maxDiff) {
 		Date transactionDate = new Date(tansactionTimestamp);
 		LOG.info("Date of transaction: " + transactionDate);
