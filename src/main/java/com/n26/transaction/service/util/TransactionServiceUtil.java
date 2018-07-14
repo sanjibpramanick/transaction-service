@@ -18,7 +18,7 @@ import com.n26.transaction.service.annotation.Log;
  */
 public class TransactionServiceUtil {
 
-	private static Logger log = LoggerFactory.getLogger(TransactionServiceUtil.class.getName());
+	private static Logger LOG = LoggerFactory.getLogger(TransactionServiceUtil.class.getName());
 
 	/**
 	 * converts epoch time to java timestamp in milliseconds
@@ -31,6 +31,14 @@ public class TransactionServiceUtil {
 		return epochTime * 1000;
 	}
 
+	public static boolean isTansactionMadeBeforeTime(Long tansactionTimestamp, Integer maxDiff) {
+		Date transactionDate = new Date(tansactionTimestamp);
+		LOG.info("Date of transaction: " + transactionDate);
+		Date currentDate = new Date(System.currentTimeMillis());
+		LOG.info("Current Date:" + currentDate);
+		return getDifferenceInSeconds(transactionDate, currentDate) >= maxDiff;
+	}
+
 	/**
 	 * Returns the time difference in seconds
 	 * 
@@ -39,10 +47,11 @@ public class TransactionServiceUtil {
 	 * @return the time difference in seconds
 	 */
 	public static Long getDifferenceInSeconds(Date startDate, Date endDate) {
-		log.info("Start Date: " + startDate);
-		log.info("End Date: " + endDate);
+		LOG.info("Start Date: " + startDate);
+		LOG.info("End Date: " + endDate);
 		Duration diff = Duration.between(LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.systemDefault()),
 				LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()));
+		LOG.info("Difference: " + diff.getSeconds());
 		return diff.getSeconds();
 	}
 }

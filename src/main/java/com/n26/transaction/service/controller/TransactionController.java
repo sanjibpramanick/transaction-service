@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.n26.transaction.service.bean.TransactionRequestVO;
+import com.n26.transaction.service.constant.TransactionServiceMappingPath;
 import com.n26.transaction.service.provider.TransactionEventProvider;
 
 /**
  * Controller to expose apis for the transactions
  * 
- * @author pramanick_s
+ * @author Sanjib Pramanick
  *
  */
 @Controller
@@ -29,7 +30,7 @@ public class TransactionController {
 	 * @param transactionRequest
 	 * @param response
 	 */
-	@PostMapping(value = "/transactions")
+	@PostMapping(value = TransactionServiceMappingPath.TRANSACTION_MAPPING_PATH)
 	public @ResponseBody void introduceTransaction(@RequestBody TransactionRequestVO transactionRequest,
 			HttpServletResponse response) {
 		response.setStatus(provider.createEntry(transactionRequest));
