@@ -5,6 +5,8 @@
 		<classes>
 			<class
 				name="com.n26.transaction.service.provider.StatisticsProviderTest" />
+				<class
+				name="com.n26.transaction.service.provider.TransactionEventProviderTest" />
 		</classes>
 	</test>
 </suite>

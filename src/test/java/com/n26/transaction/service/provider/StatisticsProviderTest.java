@@ -2,10 +2,8 @@ package com.n26.transaction.service.provider;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
@@ -21,8 +19,7 @@ import com.n26.transaction.service.listener.ReportListener;
  * @author Sanjib Pramanick
  *
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = TransactionServiceApplication.class)
+@SpringBootTest(classes=TransactionServiceApplication.class)
 @Listeners({ ReportListener.class })
 public class StatisticsProviderTest extends AbstractTestNGSpringContextTests {
 
@@ -41,6 +38,21 @@ public class StatisticsProviderTest extends AbstractTestNGSpringContextTests {
 			Reporter.log("should_get_default_values", true);
 		} catch (Throwable t) {
 			Reporter.log("should_get_default_values", false);
+		}
+	}
+
+	@Test(priority = 4, description = "current statistics Test")
+	public void should_get_proper_statistics() {
+		TransactionStatistic statistic = provider.getStatistic(TransactionServiceConstant.LAST_MINUTE_KEY);
+		try {
+			assertTrue(statistic.getAvg().equals(150.0));
+			assertTrue(statistic.getSum().equals(150.0));
+			assertTrue(statistic.getMax().equals(150.0));
+			assertTrue(statistic.getMin().equals(150.0));
+			assertTrue(statistic.getCount().equals(1L));
+			Reporter.log("should_get_proper_statistics", true);
+		} catch (Throwable t) {
+			Reporter.log("should_get_proper_statistics", false);
 		}
 	}
 }
