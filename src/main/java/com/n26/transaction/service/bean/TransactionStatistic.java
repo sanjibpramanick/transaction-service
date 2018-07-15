@@ -20,9 +20,9 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class TransactionStatistic {
 
-	private Double sum;
-	private Double avg;
-	private Double max;
-	private Double min;
-	private Long count;
+	private Double sum = 0.0;
+	private Double avg = 0.0;
+	private Double max = 0.0;
+	private Double min = 0.0;
+	private Long count = 0L;
 }
