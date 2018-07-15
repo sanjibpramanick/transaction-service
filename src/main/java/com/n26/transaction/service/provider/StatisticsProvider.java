@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.n26.transaction.service.annotation.Log;
 import com.n26.transaction.service.bean.TransactionRequestVO;
 import com.n26.transaction.service.bean.TransactionStatistic;
 
@@ -22,6 +23,7 @@ public class StatisticsProvider {
 
 	public static final Map<String, CopyOnWriteArrayList<TransactionRequestVO>> TRANSACTION_MAP = new HashMap<>();
 
+	@Log
 	public TransactionStatistic getStatistic(String dataSetName) {
 		return calculate(TRANSACTION_MAP.get(dataSetName));
 	}

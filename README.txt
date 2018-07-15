@@ -13,3 +13,5 @@ Localhost Access Logs Location: <project-base-dir>/logs/access-logs/logs/
 Use the following command to run as a service
 
 nohup mvn clean install spring-boot:run &
+
+Access Test Report here: <project-base-dir>/target/surefire-reports/ExtentSummaryReport.html
