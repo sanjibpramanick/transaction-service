@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.n26.transaction.service.bean.TransactionRequestVO;
 import com.n26.transaction.service.constant.TransactionServiceMappingPath;
-import com.n26.transaction.service.provider.TransactionEventProvider;
+import com.n26.transaction.service.provider.TransactionService;
 
 /**
  * Controller to expose apis for the transactions
@@ -22,7 +22,7 @@ import com.n26.transaction.service.provider.TransactionEventProvider;
 public class TransactionController {
 
 	@Autowired
-	private TransactionEventProvider provider;
+	private TransactionService service;
 
 	/**
 	 * post mapping to introduce a transaction into the system
@@ -33,6 +33,6 @@ public class TransactionController {
 	@PostMapping(value = TransactionServiceMappingPath.TRANSACTION_MAPPING_PATH)
 	public @ResponseBody void introduceTransaction(@RequestBody TransactionRequestVO transactionRequest,
 			HttpServletResponse response) {
-		response.setStatus(provider.createEntry(transactionRequest));
+		response.setStatus(service.createEntry(transactionRequest));
 	}
 }

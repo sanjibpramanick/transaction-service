@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.n26.transaction.service.bean.TransactionStatistic;
 import com.n26.transaction.service.constant.TransactionServiceConstant;
 import com.n26.transaction.service.constant.TransactionServiceMappingPath;
-import com.n26.transaction.service.provider.StatisticsProvider;
+import com.n26.transaction.service.provider.StatisticsService;
 
 /**
  * Controller to expose apis for the statistics
@@ -20,7 +20,7 @@ import com.n26.transaction.service.provider.StatisticsProvider;
 public class StatisticsController {
 
 	@Autowired
-	private StatisticsProvider provider;
+	private StatisticsService service;
 
 	/**
 	 * returns statistic of last minute
@@ -29,7 +29,7 @@ public class StatisticsController {
 	 */
 	@GetMapping(value = TransactionServiceMappingPath.STATISTICS_MAPPING_PATH)
 	public @ResponseBody TransactionStatistic getStatisticOfLastMinute() {
-		return provider.getStatistic(TransactionServiceConstant.LAST_MINUTE_KEY);
+		return service.getStatistic(TransactionServiceConstant.LAST_MINUTE_KEY);
 	}
 
 }

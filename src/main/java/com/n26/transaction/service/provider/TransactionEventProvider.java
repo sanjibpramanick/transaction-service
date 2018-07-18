@@ -20,7 +20,7 @@ import com.n26.transaction.service.util.TransactionServiceUtil;
  *
  */
 @Service
-public class TransactionEventProvider {
+public class TransactionEventProvider implements TransactionService{
 
 	private static Logger LOG = LoggerFactory.getLogger(TransactionEventProvider.class.getName());
 
@@ -31,6 +31,7 @@ public class TransactionEventProvider {
 	 * @return
 	 */
 	@Log
+	@Override
 	public int createEntry(TransactionRequestVO transactionRequest) {
 		LOG.info("Transaction Received");
 		if (transactionRequest == null) {

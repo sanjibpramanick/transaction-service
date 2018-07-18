@@ -19,14 +19,9 @@ import com.n26.transaction.service.bean.TransactionStatistic;
  *
  */
 @Service
-public class StatisticsProvider {
+public class StatisticsProvider implements StatisticsService {
 
 	public static final Map<String, CopyOnWriteArrayList<TransactionRequestVO>> TRANSACTION_MAP = new HashMap<>();
-
-	@Log
-	public TransactionStatistic getStatistic(String dataSetName) {
-		return calculate(TRANSACTION_MAP.get(dataSetName));
-	}
 
 	private TransactionStatistic calculate(CopyOnWriteArrayList<TransactionRequestVO> list) {
 		if (list == null) {
@@ -40,5 +35,11 @@ public class StatisticsProvider {
 	private TransactionStatistic buildStatistic(DoubleSummaryStatistics statistic) {
 		return new TransactionStatistic(statistic.getSum(), statistic.getAverage(), statistic.getMax(),
 				statistic.getMin(), statistic.getCount());
+	}
+
+	@Log
+	@Override
+	public TransactionStatistic getStatistic(String dataSetName) {
+		return calculate(TRANSACTION_MAP.get(dataSetName));
 	}
 }
